@@ -1,10 +1,28 @@
-const { request, response } = require('express');
-const express=require('express');
-const { param } = require('express/lib/router');
+import express, { request, response } from 'express';
+import { MongoClient } from 'mongodb';
+import dotenv from 'dotenv';
+import { getbike, updateBike, getbikebyid, editbikebyid, deletebikebyid } from './editbikebyid.js';
+import {bikesRouter} from "./routes/bike.js";
 
+dotenv.config();// getting file from .env
+console.log(process.env)
 const app = express();
 //const PORT=9000;
 const PORT=process.env.PORT ||9000
+
+
+const MONGO_URL=process.env.MONGO_URL;
+
+async function createConnection(){
+    const client=new MongoClient(MONGO_URL);
+    await client.connect();
+    console.log("Mongodb connected");
+    return client;
+}
+export const client=await createConnection();
+  //middleware
+  app.use(express.json());
+//const dbConnection=require('./db')
 const bikes=[
     {
       "id": "100",
@@ -339,8 +357,7 @@ const bikes=[
     "fuelCapacity": "15L",
     "left":6,
     "dayprice":189,
-    "weekly":899
-    ,
+    "weekly":899,
     "monthly":2999
    },
    {
@@ -370,26 +387,12 @@ const bikes=[
   
   ]
 
-const dbConnection=require('./db')
-app.get("/",(request,response)=>{
+  app.get("/",(request,response)=>{
     response.send("hello");
 });
-
-app.get("/fleetandpricing",(request,response)=>{
-    response.send(bikes);
-    
-});
-
-app.get("/fleetandpricing/:id",(request,response)=>{
-    console.log(request.params)
-    const {id}=request.params;
-    const bike=bikes.find(a=>a.id===id);
-    bike
-    ?response.send(bike)
-    :response.status(404).send({message:"No maching bike"});
-    
-});
-
+app.use("/fleetandpricing",bikesRouter)
 
 
 app.listen(PORT,()=>console.log(`App is started ${PORT}`));
+
+
