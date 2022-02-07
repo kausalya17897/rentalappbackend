@@ -8,7 +8,7 @@ dotenv.config();// getting file from .env
 console.log(process.env)
 const app = express();
 //const PORT=9000;
-const PORT=process.env.PORT ||9000
+const PORT=process.env.PORT;
 
 
 const MONGO_URL=process.env.MONGO_URL;
