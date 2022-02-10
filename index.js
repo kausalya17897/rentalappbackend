@@ -4,16 +4,15 @@ import dotenv from 'dotenv';
 import { getbike, updateBike, getbikebyid, editbikebyid, deletebikebyid } from './editbikebyid.js';
 import {bikesRouter} from "./routes/bike.js";
 import cors from 'cors';
+
+import { usersRouter } from './routes/users.js';
 dotenv.config();// getting file from .env
 console.log(process.env)
 const app = express();
 //const PORT=9000;
 const PORT=process.env.PORT;
 
-app.use(cors());  //3rd party middleware to access data from anywhere
-//middleware inbuilt
-app.use(express.json());
-
+app.use(cors());  //3rd party middleware to access data
 const MONGO_URL=process.env.MONGO_URL;
 
 async function createConnection(){
@@ -23,7 +22,8 @@ async function createConnection(){
     return client;
 }
 export const client=await createConnection();
-  
+  //middleware
+  app.use(express.json());
 //const dbConnection=require('./db')
 const bikes=[
     {
@@ -393,6 +393,9 @@ const bikes=[
     response.send("hello");
 });
 app.use("/fleetandpricing",bikesRouter)
+app.use("/usersdata",usersRouter);
+
+
 
 
 app.listen(PORT,()=>console.log(`App is started ${PORT}`));

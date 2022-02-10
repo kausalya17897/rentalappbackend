@@ -2,16 +2,17 @@ import express from 'express';
 const router=express.Router();
 
 import { getbike, updateBike, getbikebyid, editbikebyid, deletebikebyid } from '../editbikebyid.js';
+import { auth } from '../middleware/auth.js';
 
 router
 .route("/")
-.get(async(request,response)=>{
+.get(auth,async(request,response)=>{
   const bike=await getbike();
    console.log(bike);
     response.send(bike);
     
 })
-.post(async(request,response)=>{
+.post(auth,async(request,response)=>{
   const data=request.body;
   const result=await updateBike(data);
   response.send(result)
