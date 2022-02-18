@@ -45,6 +45,7 @@ if(!userFromDB){
 }
 const storedPassword=userFromDB.password;
 console.log(storedPassword);
+//to compare stored password and typed password is same
 const isPasswordMatch=await bcrypt.compare(password,storedPassword)
   
 console.log(isPasswordMatch);

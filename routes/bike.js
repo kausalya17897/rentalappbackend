@@ -1,9 +1,8 @@
 import express from 'express';
-const router=express.Router();
 
 import { getbike, updateBike, getbikebyid, editbikebyid, deletebikebyid } from '../editbikebyid.js';
 import { auth } from '../middleware/auth.js';
-
+const router=express.Router();
 router
 .route("/")
 .get(auth,async(request,response)=>{
