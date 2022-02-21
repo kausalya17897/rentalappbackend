@@ -1,7 +1,8 @@
 import { response } from 'express';
 import jwt from 'jsonwebtoken';
+import dotenv from "dotenv";
 
-
+dotenv.config();
 export const auth=(request,response,next)=>{
     
 try

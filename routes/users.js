@@ -3,6 +3,7 @@ import { getbike, updateBike, getbikebyid, editbikebyid, deletebikebyid, createU
 import {genPassword} from "../editbikebyid.js";
 import bcrypt from 'bcrypt'
 import jwt  from 'jsonwebtoken';
+import dotenv from "dotenv";
 const router=express.Router();
 dotenv.config();
 router
