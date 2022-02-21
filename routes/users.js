@@ -4,6 +4,7 @@ import {genPassword} from "../editbikebyid.js";
 import bcrypt from 'bcrypt'
 import jwt  from 'jsonwebtoken';
 const router=express.Router();
+dotenv.config();
 router
 .route("/signup").post(async(request,response)=>{
   const {username,password}=request.body;
