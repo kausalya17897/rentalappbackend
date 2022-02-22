@@ -10,7 +10,7 @@ router
 .route("/signup").post(async(request,response)=>{
   const {username,password}=request.body;
   const userFromDB=await getUserByName(username);
- console.log(userFromDB);
+ console.log("user",userFromDB);
 
  if(userFromDB){
   response.send({message:"username already exists"})
@@ -46,7 +46,7 @@ if(!userFromDB){
   return;
 }
 const storedPassword=userFromDB.password;
-console.log(storedPassword);
+console.log("pas",storedPassword);
 //to compare stored password and typed password is same
 const isPasswordMatch=await bcrypt.compare(password,storedPassword)
   

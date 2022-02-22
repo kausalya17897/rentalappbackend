@@ -47,7 +47,7 @@ export async function getUserByName(username) {
 async function genPassword(password){
   const NO_OF_ROUNDS=10;
   const salt=await bcrypt.genSalt(NO_OF_ROUNDS);
-  console.log(salt);
+  console.log("salt",salt);
   const hashpassword= await bcrypt.hash(password,salt);
   console.log(hashpassword);
   return hashpassword;
