@@ -7,15 +7,17 @@ router
 .route("/")
 .get(auth,async(request,response)=>{
   const bike=await getbike();
+  const token=request.body.jwt;
    console.log(bike);
     response.send(bike);
-    
+    response.json({jwt: token});
 })
 .post(auth,async(request,response)=>{
   const data=request.body;
+  const token=request.body.jwt;
   const result=await updateBike(data);
-  response.send(result)
-  
+  response.send(result);
+  response.json({jwt: token});
   {/*response.send(data)*/}
 })
 

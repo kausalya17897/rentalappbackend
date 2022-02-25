@@ -9,12 +9,12 @@ import { usersRouter } from './routes/users.js';
 dotenv.config();// getting file from .env
 console.log(process.env)
 const app = express();
-//const PORT=9000;
-const PORT=process.env.PORT;
+const PORT=3000;
+//const PORT=process.env.PORT;
 
 app.use(cors());  //3rd party middleware to access data
-const MONGO_URL=process.env.MONGO_URL;
-
+//const MONGO_URL=process.env.MONGO_URL;
+const MONGO_URL="mongodb://localhost";
 async function createConnection(){
     const client=new MongoClient(MONGO_URL);
     await client.connect();
@@ -392,8 +392,9 @@ const bikes=[
   app.get("/",(request,response)=>{
     response.send("hello");
 });
-app.use("/fleetandpricing",bikesRouter)
 app.use("/usersdata",usersRouter);
+app.use("/fleetandpricing",bikesRouter)
+
 
 
 

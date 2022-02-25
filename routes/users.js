@@ -54,7 +54,8 @@ console.log(isPasswordMatch);
 console.log(userFromDB);
 if(isPasswordMatch){
  const token=jwt.sign({id:userFromDB._id},process.env.SECRET_KEY)
-  response.send({message:"successful login",token:token});
+ console.log("tokk",token)
+ response.send({message:"successful login",token:token});
 }else{
   response.status(400).send({message:"Invalid credentials"});
 }
