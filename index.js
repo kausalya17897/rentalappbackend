@@ -12,7 +12,7 @@ const app = express();
 const PORT=3000;
 //const PORT=process.env.PORT;
 
-app.use(cors());  //3rd party middleware to access data
+app.use(cors({allowedHeaders: "*"}));  //3rd party middleware to access data
 //const MONGO_URL=process.env.MONGO_URL;
 const MONGO_URL="mongodb://localhost";
 async function createConnection(){
