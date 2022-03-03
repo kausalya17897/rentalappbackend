@@ -12,7 +12,7 @@ const app = express();
 //const PORT=3000;
 const PORT=process.env.PORT;
 
-app.use(cors({allowedHeaders: "*"}));  //3rd party middleware to access data
+//app.use(cors({allowedHeaders: "*"}));  //3rd party middleware to access data
 const MONGO_URL=process.env.MONGO_URL;
 //const MONGO_URL="mongodb://localhost";
 async function createConnection(){
@@ -394,14 +394,15 @@ const bikes=[
     res.setHeader('Access-Control-Allow-Origin', '*');
 
     // Request methods you wish to allow
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    res.setHeader('Access-Control-Request-Method', '*');
+    res.setHeader('Access-Control-Allow-Methods', '*');
 
     // Request headers you wish to allow
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+    res.setHeader('Access-Control-Allow-Headers', '*');
 
     // Set to true if you need the website to include cookies in the requests sent
     // to the API (e.g. in case you use sessions)
-    res.setHeader('Access-Control-Allow-Credentials', true);
+    //res.setHeader('Access-Control-Allow-Credentials', true);
 
     // Pass to next layer of middleware
     next();
